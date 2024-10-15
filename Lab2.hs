@@ -74,5 +74,8 @@ instance Num N where
     (-) :: N -> N -> N
     (-) = \m -> \n -> case m of {
         O -> O;
-        S x -> x - n;
+        S x -> case n of {
+            O -> m;
+            S y -> x - y;
+        }
     }
