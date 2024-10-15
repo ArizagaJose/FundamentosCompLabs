@@ -79,3 +79,96 @@ instance Num N where
             S y -> x - y;
         }
     }
+
+(%) :: N -> N -> N
+(%) = \m -> \n -> case m of {
+    O -> O;
+    S x -> case n of {
+        O -> S(O);
+        S y -> (m%y)* m
+    }
+}
+
+par :: N -> Bool
+par = \n -> case n of {
+  O -> True;
+  S x -> not (par x)
+}
+
+impar :: N -> Bool
+impar = \n -> case n of {
+  O -> False;
+  S x -> not(impar x)
+}
+
+doble :: N -> N
+doble = \n -> n * S(S(O))
+
+triple :: N -> N
+triple = \n -> case n of {
+    O -> O;
+    S x -> S(S(S(triple (x))))
+}
+
+fact :: N -> N
+fact = \n -> case n of {
+    O -> S(O);
+    S x -> (fact x)*n
+}
+
+sumi :: N -> N
+sumi = \n -> case n of {
+    O -> O;
+    S x -> (sumi x)+n
+}
+
+sumdobles :: N -> N
+sumdobles = \n -> case n of {
+    O -> O;
+    S x -> (sumdobles x) + doble n
+}
+
+sumfacts :: N -> N 
+sumfacts = \n -> case n of {
+    O -> O;
+    S x -> (sumfacts x) + fact n
+}
+
+sumfactss :: N -> N 
+sumfactss = \n -> sumfi fact n
+
+sumfi :: (N->N)-> N -> N
+sumfi = \p -> \n -> case n of {
+    O -> O;
+    S x -> sumfi p x + p n
+}
+
+sumpares :: N -> N
+sumpares = \n -> case n of {
+    O -> O;
+    S x -> case par n of {
+        True -> sumpares x + n;
+        False -> sumpares x;
+    }
+}
+
+sumparess :: N -> N
+sumparess = \n -> sumpi par n
+
+sumimpares :: N -> N
+sumimpares = \n -> case n of {
+    O -> O;
+    S x -> case impar n of {
+        True -> sumimpares x + n;
+        False -> sumimpares x;
+    }
+}
+
+sumpi :: (N->Bool) -> N -> N
+sumpi = \p -> \n -> case n of {
+    O -> O;
+    S x -> case p n of {
+        True -> sumpi p x + n;
+        False -> sumpi p x
+    }
+}
