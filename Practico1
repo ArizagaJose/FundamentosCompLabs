@@ -1,3 +1,0 @@
-{-#LANGUAGE GADTs, EmptyDataDecls, EmptyCase #-}
-{-# OPTIONS_GHC -fno-warn-tabs #-}
-

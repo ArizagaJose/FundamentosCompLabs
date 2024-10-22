@@ -2,6 +2,8 @@
 {-# OPTIONS_GHC -fno-warn-tabs #-}
 {-# OPTIONS_GHC -fno-warn-missing-methods #-}
 
+module Lab2 where
+
 data N where { O :: N ; S :: N -> N } deriving Show
 
 uno :: N
