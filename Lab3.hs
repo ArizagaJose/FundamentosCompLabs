@@ -111,15 +111,57 @@ alll = \func -> \l -> and (map func l)
 
 (++) :: [a]->[a]->[a]
 (++) = \l1 -> \l2 -> case l1 of {
-    [] -> [];
-    x:xs -> case l2 of {
-        [] -> [];
-        y:ys -> x:y:xs++ys
-    }
+    [] -> l2;
+    x:xs -> x:(xs ++ l2)
 }
 
 reverse :: [a]->[a]
 reverse = \l -> case l of {
     [] -> [];
-    x:xs -> reverse xs:x
+    x:xs -> reverse xs ++ [x];
+}
+
+elem :: Eq a => a -> [a]-> Bool
+elem = \n -> \l -> case l of {
+    [] -> False;
+    x:xs -> case n==x of {
+        True -> True;
+        False -> elem n xs;
+    }
+}
+
+concat :: [[a]] -> [a]
+concat = \l1 -> case l1 of {
+    []->[];
+    x:xs -> x ++ concat xs
+}
+
+lensum :: [[a]] -> N
+lensum = \l -> case l of {
+    [] -> O;
+    x:xs -> length x + lensum xs
+}
+
+fst :: (a,b) -> a
+fst = \p -> case p of {
+    (primero, segundo) -> primero;
+}
+
+snd :: (a,b) -> b
+snd = \p -> case p of {
+    (primero, segundo) -> segundo;
+}
+
+{- pares ordenados -}
+
+
+pre :: Bool -> String -> a -> a
+pre = \b -> \s -> \x -> case b of {
+    True -> x;
+    False -> error s;
+}
+
+head :: [a] -> a
+head = \l -> case l of {
+    []
 }
