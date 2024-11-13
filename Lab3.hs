@@ -142,6 +142,8 @@ lensum = \l -> case l of {
     x:xs -> length x + lensum xs
 }
 
+{- pares ordenados -}
+
 fst :: (a,b) -> a
 fst = \p -> case p of {
     (primero, segundo) -> primero;
@@ -152,7 +154,8 @@ snd = \p -> case p of {
     (primero, segundo) -> segundo;
 }
 
-{- pares ordenados -}
+{- funciones parciales -}
+
 
 
 pre :: Bool -> String -> a -> a
@@ -162,6 +165,7 @@ pre = \b -> \s -> \x -> case b of {
 }
 
 head :: [a] -> a
-head = \l -> case l of {
-    []
-}
+head = \l -> pre (not(null l)) "Las listas no pueden ser vacias" (
+    case l of {
+        x:xs -> x;
+    })
