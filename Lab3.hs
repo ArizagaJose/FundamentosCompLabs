@@ -169,3 +169,12 @@ head = \l -> pre (not(null l)) "Las listas no pueden ser vacias" (
     case l of {
         x:xs -> x;
     })
+
+pares :: [a] -> [a]
+pares = \l -> case l of {
+    [] -> [];
+    x:xs -> case par(length xs) of {
+        True -> x:pares xs;
+        False -> pares xs;
+    };
+}
